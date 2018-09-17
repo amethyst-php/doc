@@ -21,6 +21,7 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
     {
         return [
             \Railken\LaraOre\DocumentationGeneratorServiceProvider::class,
+            \Railken\LaraOre\Tests\App\AddressServiceProvider::class,
         ];
     }
 }

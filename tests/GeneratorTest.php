@@ -6,6 +6,6 @@ class GeneratorTest extends BaseTest
 {
     public function testSomething()
     {
-        $this->assertEquals(1, 1);
+        $this->artisan('ore:documentation:generate', ['--d' => getcwd().'/var/cache/docs']);
     }
 }

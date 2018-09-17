@@ -11,7 +11,7 @@ class GenerateDocumentationCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ore:documentation:generate';
+    protected $signature = 'ore:documentation:generate {--d=}';
 
     /**
      * The console command description.
@@ -27,6 +27,6 @@ class GenerateDocumentationCommand extends Command
      */
     public function handle()
     {
-        $this->info('a');
+        app()->get('ore.doc')->generateAll(__DIR__.'/../../stubs', $this->option('d') ? $this->option('d') : getcwd().'/docs');
     }
 }

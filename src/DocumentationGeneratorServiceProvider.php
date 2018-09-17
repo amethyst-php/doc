@@ -4,6 +4,7 @@ namespace Railken\LaraOre;
 
 use Illuminate\Support\ServiceProvider;
 use Railken\LaraOre\Console\Commands\GenerateDocumentationCommand;
+use Railken\LaraOre\Generator\DocumentGenerator;
 
 class DocumentationGeneratorServiceProvider extends ServiceProvider
 {
@@ -13,6 +14,7 @@ class DocumentationGeneratorServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->commands([GenerateDocumentationCommand::class]);
+        $this->app->singleton('ore.doc', DocumentGenerator::class);
     }
 
     /**

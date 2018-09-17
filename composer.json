@@ -4,14 +4,16 @@
     "license": "MIT",
     "require": {
         "php": ">=7.1",
-        "railken/bag": "^1.2",
-        "railken/laravel-manager": "^3.1"
+        "rcrowe/twigbridge": "^0.9.6",
+        "railken/bag": "^1.2"
     },
     "require-dev": {
         "phpstan/phpstan": "^0.10",
         "phpunit/phpunit": "~7.1",
         "orchestra/testbench": "3.6.*",
-        "friendsofphp/php-cs-fixer": "^2.8.1"
+        "friendsofphp/php-cs-fixer": "^2.8.1",
+        "railken/lara-ore-api": "dev-master",
+        "railken/laravel-manager": "^3.1"
     },
     "autoload": {
         "psr-4" : {
@@ -19,7 +21,10 @@
         }
     },
     "autoload-dev": {
-        "psr-4": { "Railken\\LaraOre\\Tests\\": "tests/" }
+        "psr-4": { 
+            "Railken\\LaraOre\\Tests\\": "tests/",
+            "Railken\\LaraOre\\Tests\\App\\": "tests/App/src" 
+        }
     },
     "extra": {
         "laravel": {
