@@ -25,7 +25,7 @@ Retrieving all entities
 $repository->findAll();
 ```
 
-Performing a query using directly \Illuminate\DataBase\Eloquent\Builder
+Performing a query using \Illuminate\DataBase\Eloquent\Builder
 
 ```php
 $repository->newQuery()->where('id', 1)->first();

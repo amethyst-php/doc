@@ -3,13 +3,11 @@
 Once you've got the result you should always check if an error has occurred, if not, retrieve the resource.
 
 ```php
+use {{ manager.class }};
 
-use Railken\LaraOre\Address\AddressManager;
+$manager = new {{ manager.instance_shortname }}();
 
-$manager = new AddressManager();
-
-$result = $manager->create({{ manager.parameters_formatted | raw }}
-);
+$result = $manager->create({{ manager.parameters_formatted | raw }});
 
 if ($result->ok()) {
 

@@ -14,10 +14,14 @@ Create a new entity
 $result = $manager->create({{ manager.parameters_formatted | raw }});
 ```
 
-Throw an exception if the operation fails
+Check the result of the operation
 
 ```php
-$result = $manager->createOrFail({{ manager.parameters_formatted | raw }});
+if ($result->ok()) {
+	// All ok
+} else {
+	// Something goes wrong
+}
 ```
 
 Retrieve the resource created
@@ -25,6 +29,20 @@ Retrieve the resource created
 ```php
 $resource = $result->getResource();
 ```
+
+Throw an exception immediately if the operation fails
+
+```php
+
+use Railken\Laravel\Manager\Exceptions\Exception;
+
+try {
+	$result = $manager->createOrFail({{ manager.parameters_formatted | raw }});
+} catch (Exception $e) {
+	// ...
+}
+```
+
 
 Links:
 * [Attributes](attributes.md)
