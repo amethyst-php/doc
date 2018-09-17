@@ -115,6 +115,7 @@ class DocumentGenerator
         $this->managers[$class] = [
             'package'				            => $package,
             'class'                  => $class,
+            'entity'                => $instance->newEntity(),
             'instance_shortname'     => (new \ReflectionClass($instance))->getShortName(),
             'instance'	              => $instance,
             'errors' 	               => $errors,

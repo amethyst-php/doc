@@ -1,16 +1,17 @@
 ## Remove 
 
-Sample code
+Define a new instance of the [Manager](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Manager.php))
 
 ```php
-
 use {{ manager.class }};
 
 $manager = new {{ manager.instance_shortname }}();
+```
 
-$resource = $manager->getRepository()->findOneById(1);
+```php
+$entity = $manager->getRepository()->findOneById(1);
 
-$result = $manager->remove($resource);
+$result = $manager->remove($entity);
 ```
 
 Links:

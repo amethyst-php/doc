@@ -1,6 +1,6 @@
 ## Create
 
-Define a new instance of the manager
+Define a new instance of the [Manager](manager.md)
 
 ```php
 use {{ manager.class }};
@@ -8,7 +8,7 @@ use {{ manager.class }};
 $manager = new {{ manager.instance_shortname }}();
 ```
 
-Create a new entity
+Create a new [entity](model.md)
 
 ```php
 $result = $manager->create({{ manager.parameters_formatted | raw }});
@@ -18,16 +18,17 @@ Check the result of the operation
 
 ```php
 if ($result->ok()) {
-	// All ok
+    // All ok
 } else {
-	// Something goes wrong
+    // Something goes wrong
 }
 ```
 
-Retrieve the resource created
+Retrieve an [entity](model.md) using the [repository](repository.md)
+
 
 ```php
-$resource = $result->getResource();
+$entity = $result->getResource();
 ```
 
 Throw an exception immediately if the operation fails
@@ -37,9 +38,9 @@ Throw an exception immediately if the operation fails
 use Railken\Laravel\Manager\Exceptions\Exception;
 
 try {
-	$result = $manager->createOrFail({{ manager.parameters_formatted | raw }});
+    $result = $manager->createOrFail({{ manager.parameters_formatted | raw }});
 } catch (Exception $e) {
-	// ...
+    // ...
 }
 ```
 

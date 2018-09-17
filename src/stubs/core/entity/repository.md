@@ -1,5 +1,7 @@
 ## Repository
 
+[View source](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Repository.php))
+
 Getting repository instance
 
 ```php
