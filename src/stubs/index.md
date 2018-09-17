@@ -14,18 +14,5 @@
 	* [Permissions](core/{{ manager.instance.getName() }}/permissions.md)
 {% endfor %}
 
-## Managers
-
-
-{% for manager in managers %}
-
-### {{ manager.instance.getName() }}
-
-{{ manager.comment }}
-
-
-{% endfor %}
-
-
 
 

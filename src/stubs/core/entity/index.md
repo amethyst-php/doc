@@ -1,6 +1,10 @@
 ### {{ manager.instance.getName() }}
 
-Every manager is linked to the Eloquent\Model  https://github.com/railken/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}.php
+
+{{ manager.instance.getComment() }}
+
+
+[Eloquent\Model](https://github.com/railken/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}.php)
 
 * [Create a new entity](create.md)
 * [Update an entity](update.md)
