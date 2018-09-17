@@ -1,6 +1,6 @@
 # lara-ore-documentation-generator
 
-[![Build Status](https://img.shields.io/travis/railken/lara-ore-documentation-generator/master.svg?style=flat-square)](https://travis-ci.org/railken/lara-ore-documentation-generator)
+[![Build Status](https://travis-ci.org/railken/lara-ore-documentation-generator.svg?branch=master)](https://travis-ci.org/railken/lara-ore-documentation-generator)
 
 This is a lara-ore package.
 
