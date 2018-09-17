@@ -1,6 +1,6 @@
 ## Faker
 
-[View source](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Faker.php))
+[View source](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Faker.php)
 
 The faker can be used for testing or seeding.
 

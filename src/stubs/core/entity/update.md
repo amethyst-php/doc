@@ -1,6 +1,6 @@
 ## Update 
 
-Define a new instance of the [Manager](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Manager.php))
+Define a new instance of the [Manager](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Manager.php)
 
 ```php
 use {{ manager.class }};

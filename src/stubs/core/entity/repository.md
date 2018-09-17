@@ -1,8 +1,8 @@
 ## Repository
 
-[View source](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Repository.php))
+[View source](https://github.com/{{ manager.package }}/blob/master/src/{{ manager.instance.getName() }}/{{ manager.instance.getName() }}Repository.php)
 
-Getting repository instance
+The repository is the class to perform queries.
 
 ```php
 use {{ manager.class }};
