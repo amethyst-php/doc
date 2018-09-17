@@ -1,4 +1,4 @@
-### Remove
+## Remove
 
 ```php
 
@@ -10,3 +10,6 @@ $resource = $manager->getRepository()->findOneById(1);
 
 $result = $manager->remove($resource);
 ```
+
+---
+[Back](index.md)

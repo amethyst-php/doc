@@ -1,4 +1,4 @@
-### Result
+## Result
 
 Once you've got the result you should always check if an error has occurred, if not, retrieve the resource.
 
@@ -38,3 +38,6 @@ if ($result->ok()) {
 
 }
 ```
+
+---
+[Back](index.md)

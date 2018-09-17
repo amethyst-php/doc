@@ -1,4 +1,4 @@
-### Repository
+## Repository
 
 Getting repository instance
 
@@ -31,3 +31,6 @@ Performing a query using directly \Illuminate\DataBase\Eloquent\Builder
 $repository->newQuery()->where('id', 1)->first();
 
 ```
+
+---
+[Back](index.md)

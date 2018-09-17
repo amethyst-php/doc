@@ -1,4 +1,4 @@
-### Update
+## Update
 
 ```php
 use {{ manager.class }};
@@ -12,3 +12,6 @@ $result = $dm->update({{ manager.parameters_formatted | raw }}
 
 
 ```
+
+---
+[Back](index.md)
