@@ -26,7 +26,7 @@ return [
     | The attribute $fillable is already updated by the config 'attributes'.
     |
     */
-    'entity' => Railken\LaraOre\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}::class,
+    'entity' => Railken\LaraOre\Core\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     | The attribute $attributes is already updated by the config 'attributes'.
     |
     */
-    'manager' => Railken\LaraOre\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Manager::class,
+    'manager' => Railken\LaraOre\Core\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Manager::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ return [
     | Change this if you have to add more complex queries (e.g. ::findOneBy).
     |
     */
-    'repository' => Railken\LaraOre\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Repository::class,
+    'repository' => Railken\LaraOre\Core\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Repository::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
     | All the attributes of the manager are already included in the serializer.
     |
     */
-    'serializer' => Railken\LaraOre\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Serializer::class,
+    'serializer' => Railken\LaraOre\Core\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Serializer::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ return [
     | A validation handled by the single attributes is always preferred to this.
     |
     */
-    'validator' => Railken\LaraOre\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Validator::class,
+    'validator' => Railken\LaraOre\Core\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Validator::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -84,7 +84,7 @@ return [
     | Change this if you have to add more complex authorization.
     |
     */
-    'authorizer' => Railken\LaraOre\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Authorizer::class,
+    'authorizer' => Railken\LaraOre\Core\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Authorizer::class,
     
     /*
     |--------------------------------------------------------------------------

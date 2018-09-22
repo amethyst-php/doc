@@ -8,7 +8,7 @@ Create a new entity using the faker
 
 ```php
 
-use Railken\LaraOre\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Faker;
+use Railken\LaraOre\Core\{{ manager.instance.getName() }}\{{ manager.instance.getName() }}Faker;
 
 $result = $manager->create({{ manager.instance.getName() }}Faker::make()->parameters());
 ```
