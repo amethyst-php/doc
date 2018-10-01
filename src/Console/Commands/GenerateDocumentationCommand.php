@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\LaraOre\Console\Commands;
+namespace Railken\Amethyst\Console\Commands;
 
 use Illuminate\Console\Command;
 
@@ -11,7 +11,7 @@ class GenerateDocumentationCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ore:documentation:generate {--d=}';
+    protected $signature = 'amethyst:documentation:generate {--d=}';
 
     /**
      * The console command description.
@@ -27,6 +27,6 @@ class GenerateDocumentationCommand extends Command
      */
     public function handle()
     {
-        app()->get('ore.doc')->generateAll(__DIR__.'/../../stubs', $this->option('d') ? $this->option('d') : getcwd().'/docs');
+        app()->get('amethyst.doc')->generateAll(__DIR__.'/../../stubs', $this->option('d') ? $this->option('d') : getcwd().'/docs');
     }
 }

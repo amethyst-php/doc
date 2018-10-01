@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\LaraOre\Generator;
+namespace Railken\Amethyst\Generator;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -20,16 +20,26 @@ class DocumentGenerator
      */
     public function generateAll(string $stubs, string $destination)
     {
+        foreach (get_declared_classes() as $className) {
+            $class = new \ReflectionClass($className);
+
+            if ($class->implementsInterface(\Railken\Lem\Contracts\ManagerContract::class) && !$class->isAbstract()) {
+                $manager = new $className();
+                echo $class."\n";
+                $this->manager('test', $className, $manager->registerClasses()['faker']);
+            }
+        }
+
         $this->generateFile($stubs.'/index.md', $destination.'/index.md', [
             'managers' => $this->managers,
         ]);
 
         foreach ($this->managers as $manager) {
-            foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($stubs.'/core/entity/')) as $filename) {
+            foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($stubs.'/entity/')) as $filename) {
                 if (is_file($filename)) {
                     $filename = basename($filename);
 
-                    $this->generateFile($stubs.'/core/entity/'.$filename, $destination.'/core/'.$manager['instance']->getName().'/'.$filename, [
+                    $this->generateFile($stubs.'/entity/'.$filename, $destination.'/entity/'.$manager['instance']->getName().'/'.$filename, [
                         'manager' => $manager,
                     ]);
                 }
@@ -115,7 +125,7 @@ class DocumentGenerator
         $this->managers[$class] = [
             'package'				            => $package,
             'class'                  => $class,
-            'entity'                => $instance->newEntity(),
+            'entity'                 => $instance->newEntity(),
             'instance_shortname'     => (new \ReflectionClass($instance))->getShortName(),
             'instance'	              => $instance,
             'errors' 	               => $errors,

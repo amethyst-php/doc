@@ -1,8 +1,8 @@
 # Documentation
 
-* Core
+* Entities
 {% for manager in managers %}
-    * [{{ manager.instance.getName() }}](core/{{ manager.instance.getName() }}/index.md)
+    * [{{ manager.instance.getName() }}](entity/{{ manager.instance.getName() }}/index.md)
 {% endfor %}
 
 
