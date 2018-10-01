@@ -26,7 +26,7 @@ class DocumentGenerator
             if ($class->implementsInterface(\Railken\Lem\Contracts\ManagerContract::class) && !$class->isAbstract()) {
                 $manager = new $className();
                 echo $class."\n";
-                $this->manager('test', $className, $manager->registerClasses()['faker']);
+                $this->manager('test', $className, $manager->retrieveClasses()['faker']);
             }
         }
 
