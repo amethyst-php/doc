@@ -5,9 +5,9 @@
 The repository is the class to perform queries.
 
 ```php
-use {{ manager.class }};
+use {{ data.components.manager }};
 
-$manager = new {{ manager.instance_shortname }}();
+$manager = new {{ data.instance_shortname }}();
 
 $repository = $manager->getRepository();
 

@@ -2,12 +2,12 @@
 
 [View source]()
 
-The serializer is used to serialize an entity, you can retrieve it from the manager.
+The serializer is used to serialize an entity, you can retrieve it from the data.
 
 ```php
-use {{ manager.class }};
+use {{ data.components.manager }};
 
-$manager = new {{ manager.instance_shortname }}();
+$manager = new {{ data.instance_shortname }}();
 
 $serializer = $manager->getSerializer();
 

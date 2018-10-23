@@ -3,9 +3,9 @@
 Define a new instance of the [Manager](manager.md)
 
 ```php
-use {{ manager.class }};
+use {{ data.components.manager }};
 
-$manager = new {{ manager.instance_shortname }}();
+$manager = new {{ data.instance_shortname }}();
 ```
 
 ```php
@@ -14,7 +14,7 @@ $entity = $manager->getRepository()->findOneById(1);
 $result = $manager->remove($entity);
 ```
 
-Links:
+### Links
 * [Errors](errors.md)
 * [Performing queries with the Repository](repository.md)
 * [Handle the result](result.md)

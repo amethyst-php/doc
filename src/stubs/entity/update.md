@@ -1,11 +1,12 @@
 ## Update 
 
+
 Define a new instance of the [Manager](manager.md)
 
 ```php
-use {{ manager.class }};
+use {{ data.components.manager }};
 
-$manager = new {{ manager.instance_shortname }}();
+$manager = new {{ data.instance_shortname }}();
 ```
 
 Retrieve an [entity](model.md) using the [repository](repository.md)
@@ -18,7 +19,9 @@ $entity = $manager->getRepository()->findOneById(1);
 Update an existent [entity](model.md)
 
 ```php
-$result = $manager->update({{ manager.parameters_formatted | raw }});
+$params = {{ data.parameters_formatted | raw }};
+
+$result = $manager->update($params);
 ```
 
 * [Attributes](attributes.md)

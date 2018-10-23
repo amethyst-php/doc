@@ -22,16 +22,15 @@ interface AgentContract
 You can use whatever permission-library suits you to implement this method
 
 ```php
+use {{ data.components.manager }};
 
-use {{ manager.class }};
-
-$manager = new {{ manager.instance_shortname }}($user);
+$manager = new {{ data.instance_shortname }}($user);
 
 ```
 
 Now, when performing actions, the $result may contains permissions errors such as *_NOT_AUTHORIZED*
 
-Links:
+### Links
 * [Errors](errors.md)
 * [Handle the result](result.md)
 

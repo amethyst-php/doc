@@ -2,6 +2,8 @@
 
 namespace Railken\Amethyst\Generator;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Config;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -10,7 +12,7 @@ class DocumentGenerator
     /**
      * @var array
      */
-    protected $managers = [];
+    protected $data = [];
 
     /**
      * Generate the documentation.
@@ -20,27 +22,26 @@ class DocumentGenerator
      */
     public function generateAll(string $stubs, string $destination)
     {
-        foreach (get_declared_classes() as $className) {
-            $class = new \ReflectionClass($className);
+        // Use config to retrieve all datas
 
-            if ($class->implementsInterface(\Railken\Lem\Contracts\ManagerContract::class) && !$class->isAbstract()) {
-                $manager = new $className();
-                echo $class."\n";
-                $this->manager('test', $className, $manager->retrieveClasses()['faker']);
+        foreach (Config::get('amethyst') as $name => $package) {
+            foreach ((array) Arr::get($package, 'data') as $data) {
+                $this->addData($name, $data);
             }
         }
 
         $this->generateFile($stubs.'/index.md', $destination.'/index.md', [
-            'managers' => $this->managers,
+            'data' => $this->data,
         ]);
+        $this->generateFile($stubs.'/installation.md', $destination.'/installation.md');
 
-        foreach ($this->managers as $manager) {
+        foreach ($this->data as $data) {
             foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($stubs.'/entity/')) as $filename) {
                 if (is_file($filename)) {
                     $filename = basename($filename);
 
-                    $this->generateFile($stubs.'/entity/'.$filename, $destination.'/entity/'.$manager['instance']->getName().'/'.$filename, [
-                        'manager' => $manager,
+                    $this->generateFile($stubs.'/entity/'.$filename, $destination.'/entity/'.Arr::get($data, 'manager')->getName().'/'.$filename, [
+                        'data' => $data,
                     ]);
                 }
             }
@@ -97,18 +98,22 @@ class DocumentGenerator
     }
 
     /**
-     * Add a manager.
+     * Add a data.
      *
-     * @param string $class
-     * @param string $faker
+     * @param string $package
+     * @param array  $data
      */
-    public function manager(string $package, string $class, string $faker)
+    public function addData(string $package, array $data)
     {
-        $instance = new $class();
+        $classManager = Arr::get($data, 'manager');
+        $faker = Arr::get($data, 'faker');
 
-        $errors = array_values($instance->getExceptions());
+        $manager = new $classManager();
+        $entity = $manager->newEntity();
 
-        foreach ($instance->getAttributes() as $attribute) {
+        $errors = array_values($manager->getExceptions());
+
+        foreach ($manager->getAttributes() as $attribute) {
             $errors = array_merge($errors, array_values($attribute->getExceptions()));
         }
 
@@ -116,21 +121,20 @@ class DocumentGenerator
             return new $v();
         }, $errors);
 
-        $permissions = array_values($instance->getAuthorizer()->getPermissions());
+        $permissions = array_values($manager->getAuthorizer()->getPermissions());
 
-        foreach ($instance->getAttributes() as $attribute) {
+        foreach ($manager->getAttributes() as $attribute) {
             $permissions = array_merge($permissions, array_values($attribute->getPermissions()));
         }
 
-        $this->managers[$class] = [
+        $this->data[Arr::get($data, 'model')] = [
+            'components'             => $data,
             'package'				            => $package,
-            'class'                  => $class,
-            'entity'                 => $instance->newEntity(),
-            'instance_shortname'     => (new \ReflectionClass($instance))->getShortName(),
-            'instance'	              => $instance,
+            'manager'                => $manager,
+            'entity'                 => $entity,
+            'instance_shortname'     => (new \ReflectionClass($manager))->getShortName(),
             'errors' 	               => $errors,
             'permissions'	           => $permissions,
-            'faker'                  => $faker,
             'parameters'             => $faker::make()->parameters()->toArray(),
             'parameters_formatted'   => $this->var_export54($faker::make()->parameters()->toArray()),
         ];

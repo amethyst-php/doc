@@ -4,7 +4,7 @@ List of all permissions.
 
 | Code                           |
 |--------------------------------|
-{% for permission in manager.permissions %}| {{ permission }} |
+{% for permission in data.permissions %}| {{ permission }} |
 {% endfor %}
 
 ---

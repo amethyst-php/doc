@@ -4,7 +4,7 @@ List of all errors.
 
 | Code                           | Message                                      |
 |--------------------------------|----------------------------------------------|
-{% for error in manager.errors %}| {{ error.code }} | {{ error.message | raw }} |
+{% for error in data.errors %}| {{ error.code }} | {{ error.message | raw }} |
 {% endfor %}
 
 ---
