@@ -25,13 +25,12 @@ Create the new serializer in `app/Serializers/{{ data.className }}Serializer`
 ```php
 class {{ data.components.serializer }} as Serializer;
 
-class {{ data.className }} extends Serializer {
+class {{ data.className }}Serializer extends Serializer {
 	// ...
 }
 ```
 Update the file `configs/amethyst.{{data.package}}` with the new class
 ```php
-<?php
 return [
     'data' => [
         '{{ data.name }}' => [

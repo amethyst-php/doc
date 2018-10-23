@@ -8,13 +8,12 @@ Create the new schema in `app/Schemas/{{ data.className }}Schema`
 ```php
 class {{ data.components.schema }} as Schema;
 
-class {{ data.className }} extends Schema {
+class {{ data.className }}Schema extends Schema {
 	// ...
 }
 ```
 Update the file `configs/amethyst.{{data.package}}` with the new class
 ```php
-<?php
 return [
     'data' => [
         '{{ data.name }}' => [

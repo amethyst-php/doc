@@ -38,13 +38,12 @@ Create the new repository in `app/Repositories/{{ data.className }}Repository`
 ```php
 class {{ data.components.repository }} as Repository;
 
-class {{ data.className }} extends Repository {
+class {{ data.className }}Repository extends Repository {
 	// ...
 }
 ```
 Update the file `configs/amethyst.{{data.package}}` with the new class
 ```php
-<?php
 return [
     'data' => [
         '{{ data.name }}' => [

@@ -8,13 +8,12 @@ Create the new validator in `app/Validators/{{ data.className }}Validator`
 ```php
 class {{ data.components.validator }} as Validator;
 
-class {{ data.className }} extends Validator {
+class {{ data.className }}Validator extends Validator {
 	// ...
 }
 ```
 Update the file `configs/amethyst.{{data.package}}` with the new class
 ```php
-<?php
 return [
     'data' => [
         '{{ data.name }}' => [

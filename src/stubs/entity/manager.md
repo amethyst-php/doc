@@ -22,13 +22,12 @@ Create the new manager in `app/Managers/{{ data.className }}Manager`
 ```php
 class {{ data.components.manager }} as Manager;
 
-class {{ data.className }} extends Manager {
+class {{ data.className }}Manager extends Manager {
 	// ...
 }
 ```
 Update the file `configs/amethyst.{{data.package}}` with the new class
 ```php
-<?php
 return [
     'data' => [
         '{{ data.name }}' => [

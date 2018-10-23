@@ -8,13 +8,12 @@ Create the new authorizer in `app/Authorizers/{{ data.className }}Authorizer`
 ```php
 class {{ data.components.authorizer }} as Authorizer;
 
-class {{ data.className }} extends Authorizer {
+class {{ data.className }}Authorizer extends Authorizer {
 	// ...
 }
 ```
 Update the file `configs/amethyst.{{data.package}}` with the new class
 ```php
-<?php
 return [
     'data' => [
         '{{ data.name }}' => [
