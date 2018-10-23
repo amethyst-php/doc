@@ -4,6 +4,7 @@ namespace Railken\Amethyst\Generator;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
+use Railken\Lem\Tokens;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -24,9 +25,9 @@ class DocumentGenerator
     {
         // Use config to retrieve all datas
 
-        foreach (Config::get('amethyst') as $name => $package) {
-            foreach ((array) Arr::get($package, 'data') as $data) {
-                $this->addData($name, $data);
+        foreach (Config::get('amethyst') as $namePackage => $package) {
+            foreach ((array) Arr::get($package, 'data') as $nameData => $data) {
+                $this->addData($namePackage, $nameData, $data);
             }
         }
 
@@ -101,25 +102,46 @@ class DocumentGenerator
      * Add a data.
      *
      * @param string $package
+     * @param string $name
      * @param array  $data
      */
-    public function addData(string $package, array $data)
+    public function addData(string $package, string $name, array $data)
     {
         $classManager = Arr::get($data, 'manager');
         $faker = Arr::get($data, 'faker');
+        $className = basename(str_replace('\\', '/', Arr::get($data, 'model')));
 
         $manager = new $classManager();
         $entity = $manager->newEntity();
 
-        $errors = array_values($manager->getExceptions());
+        $errors = [];
 
-        foreach ($manager->getAttributes() as $attribute) {
-            $errors = array_merge($errors, array_values($attribute->getExceptions()));
+        foreach ($manager->getExceptions() as $code => $exception) {
         }
 
-        $errors = array_map(function ($v) {
-            return new $v();
-        }, $errors);
+        foreach ($manager->getAttributes() as $attribute) {
+            foreach ($attribute->getExceptions() as $code => $exception) {
+                if ($code === Tokens::NOT_DEFINED) {
+                    if ($attribute->getRequired()) {
+                        $errors[] = $attribute->newException($code, null);
+                    }
+                } elseif ($code === Tokens::NOT_UNIQUE) {
+                    if ($attribute->getUnique()) {
+                        $errors[] = $attribute->newException($code, null);
+                    }
+                } elseif ($code === Tokens::NOT_VALID) {
+                    if ($attribute->getFillable()) {
+                        $errors[] = $attribute->newException($code, null);
+                    }
+                } elseif ($code === Tokens::NOT_AUTHORIZED) {
+                    if ($attribute->getFillable()) {
+                        $errors[] = $attribute->newException($code, null);
+                    }
+                } else {
+                    $errors[] = $attribute->newException($code, null);
+                }
+            }
+        }
 
         $permissions = array_values($manager->getAuthorizer()->getPermissions());
 
@@ -127,16 +149,18 @@ class DocumentGenerator
             $permissions = array_merge($permissions, array_values($attribute->getPermissions()));
         }
 
-        $this->data[Arr::get($data, 'model')] = [
-            'components'             => $data,
-            'package'				            => $package,
-            'manager'                => $manager,
-            'entity'                 => $entity,
-            'instance_shortname'     => (new \ReflectionClass($manager))->getShortName(),
-            'errors' 	               => $errors,
-            'permissions'	           => $permissions,
-            'parameters'             => $faker::make()->parameters()->toArray(),
-            'parameters_formatted'   => $this->var_export54($faker::make()->parameters()->toArray()),
+        $this->data[$className] = [
+            'className'                   => $className,
+            'name'                        => $name,
+            'components'                  => $data,
+            'package'				                 => $package,
+            'manager'                     => $manager,
+            'entity'                      => $entity,
+            'instance_shortname'          => (new \ReflectionClass($manager))->getShortName(),
+            'errors' 	                    => $errors,
+            'permissions'	                => $permissions,
+            'parameters'                  => $faker::make()->parameters()->toArray(),
+            'parameters_formatted'        => $this->var_export54($faker::make()->parameters()->toArray()),
         ];
     }
 }

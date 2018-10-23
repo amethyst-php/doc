@@ -1,6 +1,4 @@
-## Faker
-
-[View source]()
+## {{ data.components.faker }}
 
 The faker can be used for testing or seeding.
 
@@ -11,6 +9,29 @@ use {{ data.components.faker }};
 
 $result = $manager->create({{ data.manager.getName() }}Faker::make()->parameters());
 ```
+
+#### Extend the class
+
+Create the new faker in `app/Fakers/{{ data.className }}Faker`
+```php
+class {{ data.components.faker }} as Faker;
+
+class {{ data.className }} extends Faker {
+	// ...
+}
+```
+Update the file `configs/amethyst.{{data.package}}` with the new class
+```php
+<?php
+return [
+    'data' => [
+        '{{ data.name }}' => [
+            'faker' => App\Fakers\{{ data.className}}Faker::class,
+        ],
+    ]
+];
+```
+
 
 ---
 [Back](index.md)

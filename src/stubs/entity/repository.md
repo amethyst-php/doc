@@ -1,6 +1,4 @@
-## Repository
-
-[View source]()
+## {{ data.components.repository }}
 
 The repository is the class to perform queries.
 
@@ -32,6 +30,28 @@ Performing a query using \Illuminate\DataBase\Eloquent\Builder
 ```php
 $repository->newQuery()->where('id', 1)->first();
 
+```
+
+#### Extend the class
+
+Create the new repository in `app/Repositories/{{ data.className }}Repository`
+```php
+class {{ data.components.repository }} as Repository;
+
+class {{ data.className }} extends Repository {
+	// ...
+}
+```
+Update the file `configs/amethyst.{{data.package}}` with the new class
+```php
+<?php
+return [
+    'data' => [
+        '{{ data.name }}' => [
+            'repository' => App\Repositories\{{ data.className}}Repository::class,
+        ],
+    ]
+];
 ```
 
 ---

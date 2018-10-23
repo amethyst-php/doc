@@ -1,10 +1,28 @@
-## Validator
-
-[View source]()
+## {{ data.components.validator }}
 
 The validator is used during any operation that manipulate the data to check if the parameters are correct. Remember that each attribute has is own validation.
 
-If you wish to update the validator, use the config file.
+#### Extend the class
+
+Create the new validator in `app/Validators/{{ data.className }}Validator`
+```php
+class {{ data.components.validator }} as Validator;
+
+class {{ data.className }} extends Validator {
+	// ...
+}
+```
+Update the file `configs/amethyst.{{data.package}}` with the new class
+```php
+<?php
+return [
+    'data' => [
+        '{{ data.name }}' => [
+            'validator' => App\Validators\{{ data.className}}Validator::class,
+        ],
+    ]
+];
+```
 
 ---
 [Back](index.md)

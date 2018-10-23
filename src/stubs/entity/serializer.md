@@ -1,6 +1,4 @@
-## Serializer
-
-[View source]()
+## {{ data.components.serializer }}
 
 The serializer is used to serialize an entity, you can retrieve it from the data.
 
@@ -21,7 +19,27 @@ $entity = $repository->findOneById(1);
 $serializer->serialize($entity)->toArray(); // Returns an array
 
 ```
+#### Extend the class
 
-If you wish to update the serializer, use the config file.
+Create the new serializer in `app/Serializers/{{ data.className }}Serializer`
+```php
+class {{ data.components.serializer }} as Serializer;
+
+class {{ data.className }} extends Serializer {
+	// ...
+}
+```
+Update the file `configs/amethyst.{{data.package}}` with the new class
+```php
+<?php
+return [
+    'data' => [
+        '{{ data.name }}' => [
+            'serializer' => App\Serializers\{{ data.className}}Serializer::class,
+        ],
+    ]
+];
+```
+
 ---
 [Back](index.md)

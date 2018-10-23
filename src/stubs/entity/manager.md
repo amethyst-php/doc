@@ -1,6 +1,4 @@
-##  Manager 
-
-[View source]()
+## {{ data.components.manager }}
 
 The manager is the main class to access and manipulate your model.
 
@@ -17,7 +15,28 @@ Remember that the manager return always a [Result](result.md).
 * [Errors](errors.md)
 * [Permissions](permissions.md)
 
-If you wish to extend the modal to add extra features or change the current one, use the config files.
+
+#### Extend the class
+
+Create the new manager in `app/Managers/{{ data.className }}Manager`
+```php
+class {{ data.components.manager }} as Manager;
+
+class {{ data.className }} extends Manager {
+	// ...
+}
+```
+Update the file `configs/amethyst.{{data.package}}` with the new class
+```php
+<?php
+return [
+    'data' => [
+        '{{ data.name }}' => [
+            'manager' => App\Managers\{{ data.className}}Manager::class,
+        ],
+    ]
+];
+```
 
 ---
 [Back](index.md)
