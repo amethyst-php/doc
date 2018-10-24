@@ -6,7 +6,9 @@ The validator is used during any operation that manipulate the data to check if 
 
 Create the new validator in `app/Validators/{{ data.className }}Validator`
 ```php
-class {{ data.components.validator }} as Validator;
+namespace App\Validators;
+
+use {{ data.components.validator }} as Validator;
 
 class {{ data.className }}Validator extends Validator {
 	// ...

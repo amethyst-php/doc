@@ -6,7 +6,9 @@ The authorizer is used during any operation that manipulate the data to check if
 
 Create the new authorizer in `app/Authorizers/{{ data.className }}Authorizer`
 ```php
-class {{ data.components.authorizer }} as Authorizer;
+namespace App\Authorizers;
+
+use {{ data.components.authorizer }} as Authorizer;
 
 class {{ data.className }}Authorizer extends Authorizer {
 	// ...

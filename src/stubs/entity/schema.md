@@ -6,7 +6,9 @@ The schema is used to define the structure of the attributes. All the $attribute
 
 Create the new schema in `app/Schemas/{{ data.className }}Schema`
 ```php
-class {{ data.components.schema }} as Schema;
+namespace App\Schemas;
+
+use {{ data.components.schema }} as Schema;
 
 class {{ data.className }}Schema extends Schema {
 	// ...

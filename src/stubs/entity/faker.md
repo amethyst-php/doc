@@ -14,7 +14,9 @@ $result = $manager->create({{ data.manager.getName() }}Faker::make()->parameters
 
 Create the new faker in `app/Fakers/{{ data.className }}Faker`
 ```php
-class {{ data.components.faker }} as Faker;
+namespace App\Fakers;
+
+use {{ data.components.faker }} as Faker;
 
 class {{ data.className }}Faker extends Faker {
 	// ...

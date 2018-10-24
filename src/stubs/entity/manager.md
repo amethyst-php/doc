@@ -20,7 +20,9 @@ Remember that the manager return always a [Result](result.md).
 
 Create the new manager in `app/Managers/{{ data.className }}Manager`
 ```php
-class {{ data.components.manager }} as Manager;
+namespace App\Managers;
+
+use {{ data.components.manager }} as Manager;
 
 class {{ data.className }}Manager extends Manager {
 	// ...

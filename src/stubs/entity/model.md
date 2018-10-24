@@ -9,7 +9,9 @@ You have to go in the file `configs/amethyst.{{data.package}}` in order to chang
 
 Create the new model in `app/Models/{{ data.className }}`
 ```php
-class {{ data.components.model }} as Model;
+namespace App\Models;
+
+use {{ data.components.model }} as Model;
 
 class {{ data.className }} extends Model {
 	// ...

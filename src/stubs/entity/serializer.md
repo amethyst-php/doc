@@ -23,7 +23,9 @@ $serializer->serialize($entity)->toArray(); // Returns an array
 
 Create the new serializer in `app/Serializers/{{ data.className }}Serializer`
 ```php
-class {{ data.components.serializer }} as Serializer;
+namespace App\Serializers;
+
+use {{ data.components.serializer }} as Serializer;
 
 class {{ data.className }}Serializer extends Serializer {
 	// ...

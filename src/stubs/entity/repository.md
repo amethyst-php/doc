@@ -36,7 +36,9 @@ $repository->newQuery()->where('id', 1)->first();
 
 Create the new repository in `app/Repositories/{{ data.className }}Repository`
 ```php
-class {{ data.components.repository }} as Repository;
+namespace App\Repositories;
+
+use {{ data.components.repository }} as Repository;
 
 class {{ data.className }}Repository extends Repository {
 	// ...
