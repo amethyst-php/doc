@@ -1,33 +1,33 @@
 {
-    "name": "railken/amethyst-doc-generator",
+    "name": "railken/doc-amethyst",
     "keywords": ["laravel", "amethyst", "amethyst-documentation-generator", "documentation-generator", "documentation", "doc", "generator"],
     "license": "MIT",
     "require": {
         "php": ">=7.1",
         "rcrowe/twigbridge": "^0.9.6",
         "railken/bag": "^1.2",
-        "railken/amethyst-common": "0.1.*"
+        "hanneskod/classtools": "~1.0",
+        "eloquent/composer-config-reader": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.1",
         "orchestra/testbench": "3.6.*",
-        "railken/amethyst-address": "0.1.*"
+        "railken/amethyst-foo": "0.1.*"
     },
     "autoload": {
         "psr-4" : {
-            "Railken\\Amethyst\\" : "src/"
+            "Railken\\Amethyst\\Documentation\\" : "src/"
         }
     },
     "autoload-dev": {
         "psr-4": { 
-            "Railken\\Amethyst\\Tests\\": "tests/",
-            "Railken\\Amethyst\\Tests\\App\\": "tests/App/src" 
+            "Railken\\Amethyst\\Documentation\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Railken\\Amethyst\\Providers\\DocGeneratorServiceProvider"
+                "Railken\\Amethyst\\Documentation\\Providers\\GeneratorServiceProvider"
             ]
         }
     }

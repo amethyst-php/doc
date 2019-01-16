@@ -1,6 +1,6 @@
-# amethyst-documentation-generator
+# doc-amethyst
 
-[![Build Status](https://travis-ci.org/railken/amethyst-documentation-generator.svg?branch=master)](https://travis-ci.org/railken/amethyst-documentation-generator)
+[![Build Status](https://travis-ci.org/railken/doc-amethyst.svg?branch=master)](https://travis-ci.org/railken/doc-amethyst)
 
 [Amethyst](https://github.com/railken/amethyst) package
 
@@ -13,7 +13,7 @@ PHP 7.1 and later.
 You can install it via [Composer](https://getcomposer.org/) by typing the following command:
 
 ```bash
-composer require railken/amethyst-documentation-generator
+composer require railken/doc-amethyst
 ```
 
 The package will automatically register itself.

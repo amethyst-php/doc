@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Tests;
+namespace Railken\Amethyst\Documentation\Tests;
 
 abstract class BaseTest extends \Orchestra\Testbench\TestCase
 {
@@ -15,13 +15,31 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         parent::setUp();
 
         $this->artisan('migrate:fresh');
+
+        $dir = $this->getDirectory();
+
+        if (file_exists($dir)) {
+            $di = new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS);
+            $ri = new \RecursiveIteratorIterator($di, \RecursiveIteratorIterator::CHILD_FIRST);
+            foreach ($ri as $file) {
+                $file->isDir() ? rmdir($file) : unlink($file);
+            }
+            rmdir($dir);
+        }
+
+        mkdir($dir, 0777, true);
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            \Railken\Amethyst\Providers\DocGeneratorServiceProvider::class,
-            \Railken\Amethyst\Providers\AddressServiceProvider::class,
+            \Railken\Amethyst\Documentation\GeneratorServiceProvider::class,
+            \Railken\Amethyst\Providers\FooServiceProvider::class,
         ];
+    }
+
+    public function getDirectory()
+    {
+        return __DIR__.'/../var';
     }
 }

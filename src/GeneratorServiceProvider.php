@@ -1,20 +1,20 @@
 <?php
 
-namespace Railken\Amethyst\Providers;
+namespace Railken\Amethyst\Documentation;
 
 use Illuminate\Support\ServiceProvider;
-use Railken\Amethyst\Console\Commands\GenerateDocumentationCommand;
-use Railken\Amethyst\Generator\DocumentGenerator;
+use Railken\Amethyst\Documentation\Console\Commands\GenerateCommand;
+use Railken\Amethyst\Documentation\Generator;
 
-class DocGeneratorServiceProvider extends ServiceProvider
+class GeneratorServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
      */
     public function boot()
     {
-        $this->commands([GenerateDocumentationCommand::class]);
-        $this->app->singleton('amethyst.doc', DocumentGenerator::class);
+        $this->commands([GenerateCommand::class]);
+        $this->app->singleton('amethyst.documentation', Generator::class);
     }
 
     /**

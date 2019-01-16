@@ -1,10 +1,10 @@
 <?php
 
-namespace Railken\Amethyst\Console\Commands;
+namespace Railken\Amethyst\Documentation\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class GenerateDocumentationCommand extends Command
+class GenerateCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -27,6 +27,7 @@ class GenerateDocumentationCommand extends Command
      */
     public function handle()
     {
-        app()->get('amethyst.doc')->generateAll(__DIR__.'/../../stubs', $this->option('d') ? $this->option('d') : getcwd().'/docs');
+
+        app()->get('amethyst.documentation')->generate($this->option('d') ? $this->option('d') : getcwd().'/docs');
     }
 }

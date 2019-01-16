@@ -1,14 +1,15 @@
 <?php
 
-namespace Railken\Amethyst\Generator;
+namespace Railken\Amethyst\Documentation;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Railken\Lem\Tokens;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Eloquent\Composer\Configuration\ConfigurationReader;
 
-class DocumentGenerator
+class Generator
 {
     /**
      * @var array
@@ -19,47 +20,59 @@ class DocumentGenerator
      * Generate the documentation.
      *
      * @param string $stubs
-     * @param string $destination
      */
-    public function generateAll(string $stubs, string $destination)
+    public function generate(string $destination)
     {
-        // Use config to retrieve all datas
+        $composerReader = new ConfigurationReader();
+        $composer = $composerReader->read(getcwd().'/composer.json');
 
-        foreach (Config::get('amethyst') as $namePackage => $package) {
-            foreach ((array) Arr::get($package, 'data') as $nameData => $data) {
-                $this->addData($namePackage, $nameData, $data);
-            }
-        }
+        $packageName = isset($composer->extra()->amethyst) ? $composer->extra()->amethyst->package : null;
 
-        $this->generateFile($stubs.'/index.md', $destination.'/index.md', [
-            'data' => $this->data,
-        ]);
-        $this->generateFile($stubs.'/installation.md', $destination.'/installation.md');
-
-        foreach ($this->data as $data) {
-            foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($stubs.'/entity/')) as $filename) {
-                if (is_file($filename)) {
-                    $filename = basename($filename);
-
-                    $this->generateFile($stubs.'/entity/'.$filename, $destination.'/entity/'.Arr::get($data, 'manager')->getName().'/'.$filename, [
-                        'data' => $data,
-                    ]);
+        $configs = $packageName ? [$packageName] : array_keys(Config::get('amethyst'));
+        
+        foreach ($configs as $config) {
+            foreach (Config::get("amethyst.".$config.".data", []) as $nameData => $data) {
+                if (Arr::get($data, 'manager')) {
+                    $this->addData($config, $nameData, $data);
                 }
             }
         }
+
+        $common = [
+            'composer' => $composer
+        ];
+
+        $this->generateFiles(__DIR__.'/../stubs/library', $destination, array_merge($common, [
+            'data' => $this->data,
+        ]));
+
+        foreach ($this->data as $data) {
+            $this->generateFiles(__DIR__.'/../stubs/entity', $destination.'/entity/'.Arr::get($data, 'manager')->getName(), array_merge($common, [
+                'data' => $data,
+            ]));
+        }
     }
 
-    public function generateFile(string $source, string $destination, array $data = [])
+
+
+    public function generateFiles(string $source, string $destination, array $data = [])
     {
-        if (!file_exists(dirname($destination))) {
-            mkdir(dirname($destination), 0755, true);
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source)) as $filename) {
+            if (is_file($filename)) {
+                $to = $destination.str_replace($source, '', $filename);
+
+                $content = file_get_contents($filename);
+
+                $content = $this->parseContent((string) $content, $data);
+
+                if (!file_exists(dirname($to))) {
+                    mkdir(dirname($to), 0755, true);
+                }
+
+                file_put_contents($to, $content);
+            }
         }
 
-        $content = file_get_contents($source);
-
-        $content = $this->parseContent((string) $content, $data);
-
-        file_put_contents($destination, $content);
     }
 
     /**
@@ -115,9 +128,6 @@ class DocumentGenerator
         $entity = $manager->newEntity();
 
         $errors = [];
-
-        foreach ($manager->getExceptions() as $code => $exception) {
-        }
 
         foreach ($manager->getAttributes() as $attribute) {
             foreach ($attribute->getExceptions() as $code => $exception) {
