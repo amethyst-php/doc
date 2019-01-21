@@ -30,16 +30,16 @@ abstract class BaseTest extends \Orchestra\Testbench\TestCase
         mkdir($dir, 0777, true);
     }
 
+    public function getDirectory()
+    {
+        return __DIR__.'/../var';
+    }
+
     protected function getPackageProviders($app)
     {
         return [
             \Railken\Amethyst\Documentation\GeneratorServiceProvider::class,
             \Railken\Amethyst\Providers\FooServiceProvider::class,
         ];
-    }
-
-    public function getDirectory()
-    {
-        return __DIR__.'/../var';
     }
 }

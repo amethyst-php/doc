@@ -2,7 +2,6 @@
 
 namespace Railken\Amethyst\Documentation\Tests;
 
-
 class GeneratorTest extends BaseTest
 {
     public function testSomething()

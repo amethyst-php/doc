@@ -4,7 +4,6 @@ namespace Railken\Amethyst\Documentation;
 
 use Illuminate\Support\ServiceProvider;
 use Railken\Amethyst\Documentation\Console\Commands\GenerateCommand;
-use Railken\Amethyst\Documentation\Generator;
 
 class GeneratorServiceProvider extends ServiceProvider
 {

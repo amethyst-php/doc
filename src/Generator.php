@@ -2,12 +2,12 @@
 
 namespace Railken\Amethyst\Documentation;
 
+use Eloquent\Composer\Configuration\ConfigurationReader;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Railken\Lem\Tokens;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Eloquent\Composer\Configuration\ConfigurationReader;
 
 class Generator
 {
@@ -29,9 +29,9 @@ class Generator
         $packageName = isset($composer->extra()->amethyst) ? $composer->extra()->amethyst->package : null;
 
         $configs = $packageName ? [$packageName] : array_keys(Config::get('amethyst'));
-        
+
         foreach ($configs as $config) {
-            foreach (Config::get("amethyst.".$config.".data", []) as $nameData => $data) {
+            foreach (Config::get('amethyst.'.$config.'.data', []) as $nameData => $data) {
                 if (Arr::get($data, 'manager')) {
                     $this->addData($config, $nameData, $data);
                 }
@@ -39,7 +39,7 @@ class Generator
         }
 
         $common = [
-            'composer' => $composer
+            'composer' => $composer,
         ];
 
         $this->generateFiles(__DIR__.'/../stubs/library', $destination, array_merge($common, [
@@ -52,8 +52,6 @@ class Generator
             ]));
         }
     }
-
-
 
     public function generateFiles(string $source, string $destination, array $data = [])
     {
@@ -72,7 +70,6 @@ class Generator
                 file_put_contents($to, $content);
             }
         }
-
     }
 
     /**
@@ -160,17 +157,17 @@ class Generator
         }
 
         $this->data[$className] = [
-            'className'                   => $className,
-            'name'                        => $name,
-            'components'                  => $data,
-            'package'				                 => $package,
-            'manager'                     => $manager,
-            'entity'                      => $entity,
-            'instance_shortname'          => (new \ReflectionClass($manager))->getShortName(),
-            'errors' 	                    => $errors,
-            'permissions'	                => $permissions,
-            'parameters'                  => $faker::make()->parameters()->toArray(),
-            'parameters_formatted'        => $this->var_export54($faker::make()->parameters()->toArray()),
+            'className'            => $className,
+            'name'                 => $name,
+            'components'           => $data,
+            'package'              => $package,
+            'manager'              => $manager,
+            'entity'               => $entity,
+            'instance_shortname'   => (new \ReflectionClass($manager))->getShortName(),
+            'errors'               => $errors,
+            'permissions'          => $permissions,
+            'parameters'           => $faker::make()->parameters()->toArray(),
+            'parameters_formatted' => $this->var_export54($faker::make()->parameters()->toArray()),
         ];
     }
 }
