@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Railken\Lem\Tokens;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Michelf\Markdown;
 
 class Generator
 {
@@ -170,4 +171,46 @@ class Generator
             'parameters_formatted' => $this->var_export54($faker::make()->parameters()->toArray()),
         ];
     }
+
+    public function write($filename, $content) {
+
+        if (!file_exists(dirname($filename))) {
+            mkdir(dirname($filename), 0755, true);
+        }
+
+        file_put_contents($filename, $content);
+    }
+
+    /**
+     * @param string $source
+     * @param string $destination
+     */
+    public function publishable(string $source, string $destination)
+    {
+
+        $docs = [];
+
+        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source)) as $filename) {
+
+            if (is_file($filename)) {
+                $destinationFile = $destination . str_replace($source, "", $filename);
+
+                $destinationFile = dirname($destinationFile) . "/". pathinfo($destinationFile, PATHINFO_FILENAME) . ".html";
+
+                $content = str_replace(".md", ".html", file_get_contents($filename));
+
+                $docs[(string) $filename] = $docs;
+                // $this->write($destinationFile, Markdown::defaultTransform($content));
+            }
+        }
+
+        $composerReader = new ConfigurationReader();
+        $composer = $composerReader->read(getcwd().'/composer.json');
+        
+        $this->generateFiles(__DIR__.'/../stubs/publishable', $destination, array_merge([
+            'docs' => $docs,
+            'composer' => $composer
+        ]));
+    }
+
 }

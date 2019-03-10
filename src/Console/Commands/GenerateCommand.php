@@ -27,6 +27,6 @@ class GenerateCommand extends Command
      */
     public function handle()
     {
-        app()->get('amethyst.documentation')->generate($this->option('d') ? $this->option('d') : getcwd().'/docs');
+        app()->get('amethyst.documentation')->generate($this->option('d') ? $this->option('d') : getcwd().'/resources/docs');
     }
 }
