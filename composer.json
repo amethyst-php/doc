@@ -28,7 +28,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Railken\\Amethyst\\Documentation\\Providers\\GeneratorServiceProvider"
+                "Railken\\Amethyst\\Documentation\\GeneratorServiceProvider"
             ]
         }
     }
