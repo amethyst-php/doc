@@ -5,10 +5,10 @@ namespace Railken\Amethyst\Documentation;
 use Eloquent\Composer\Configuration\ConfigurationReader;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
+use Michelf\Markdown;
 use Railken\Lem\Tokens;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Michelf\Markdown;
 
 class Generator
 {
@@ -172,8 +172,8 @@ class Generator
         ];
     }
 
-    public function write($filename, $content) {
-
+    public function write($filename, $content)
+    {
         if (!file_exists(dirname($filename))) {
             mkdir(dirname($filename), 0755, true);
         }
@@ -187,17 +187,15 @@ class Generator
      */
     public function publishable(string $source, string $destination)
     {
-
         $docs = [];
 
         foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source)) as $filename) {
-
             if (is_file($filename)) {
-                $destinationFile = $destination . str_replace($source, "", $filename);
+                $destinationFile = $destination.str_replace($source, '', $filename);
 
-                $destinationFile = dirname($destinationFile) . "/". pathinfo($destinationFile, PATHINFO_FILENAME) . ".html";
+                $destinationFile = dirname($destinationFile).'/'.pathinfo($destinationFile, PATHINFO_FILENAME).'.html';
 
-                $content = str_replace(".md", ".html", file_get_contents($filename));
+                $content = str_replace('.md', '.html', file_get_contents($filename));
 
                 $docs[(string) $filename] = $docs;
                 // $this->write($destinationFile, Markdown::defaultTransform($content));
@@ -206,11 +204,10 @@ class Generator
 
         $composerReader = new ConfigurationReader();
         $composer = $composerReader->read(getcwd().'/composer.json');
-        
+
         $this->generateFiles(__DIR__.'/../stubs/publishable', $destination, array_merge([
-            'docs' => $docs,
-            'composer' => $composer
+            'docs'     => $docs,
+            'composer' => $composer,
         ]));
     }
-
 }
