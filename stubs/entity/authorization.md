@@ -25,7 +25,6 @@ You can use whatever permission-library suits you to implement this method
 use {{ data.components.manager }};
 
 $manager = new {{ data.instance_shortname }}($user);
-
 ```
 
 Now, when performing actions, the $result may contains permissions errors such as *_NOT_AUTHORIZED*

@@ -5,7 +5,7 @@ namespace Railken\Amethyst\Documentation;
 use Eloquent\Composer\Configuration\ConfigurationReader;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
-use Michelf\Markdown;
+use Michelf\MarkdownExtra;
 use Railken\Lem\Tokens;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -197,8 +197,13 @@ class Generator
 
                 $content = str_replace('.md', '.html', file_get_contents($filename));
 
-                $docs[(string) $filename] = $docs;
-                // $this->write($destinationFile, Markdown::defaultTransform($content));
+                $content = MarkdownExtra::defaultTransform($content);
+
+
+                $content = $this->parseContent(file_get_contents(__DIR__.'/../stubs/publishable-page/index.html'), ['content' => $content]);
+
+                $this->write($destinationFile, $content);
+
             }
         }
 

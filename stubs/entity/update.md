@@ -1,6 +1,5 @@
 ## Update 
 
-
 Define a new instance of the [Manager](manager.md)
 
 ```php
