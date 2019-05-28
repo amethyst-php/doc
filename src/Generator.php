@@ -17,12 +17,9 @@ class Generator
      */
     protected $data = [];
 
-    /**
-     * Generate the documentation.
-     *
-     * @param string $stubs
-     */
-    public function generate(string $destination)
+    protected $composer;
+
+    public function __construct()
     {
         $composerReader = new ConfigurationReader();
         $composer = $composerReader->read(getcwd().'/composer.json');
@@ -38,9 +35,17 @@ class Generator
                 }
             }
         }
+    }
 
+    /**
+     * Generate the documentation.
+     *
+     * @param string $stubs
+     */
+    public function generate(string $destination)
+    {
         $common = [
-            'composer' => $composer,
+            'composer' => $this->composer,
         ];
 
         $this->generateFiles(__DIR__.'/../stubs/library', $destination, array_merge($common, [
@@ -48,7 +53,7 @@ class Generator
         ]));
 
         foreach ($this->data as $data) {
-            $this->generateFiles(__DIR__.'/../stubs/entity', $destination.'/entity/'.Arr::get($data, 'manager')->getName(), array_merge($common, [
+            $this->generateFiles(__DIR__.'/../stubs/entity', $destination.'/entity/'.strtolower(Arr::get($data, 'manager')->getName()), array_merge($common, [
                 'data' => $data,
             ]));
         }
@@ -200,7 +205,10 @@ class Generator
                 $content = MarkdownExtra::defaultTransform($content);
 
 
-                $content = $this->parseContent(file_get_contents(__DIR__.'/../stubs/publishable-page/index.html'), ['content' => $content]);
+                $content = $this->parseContent(file_get_contents(__DIR__.'/../stubs/publishable-page/index.html'), [
+                    'content' => $content,
+                    'data' => $this->data,
+                ]);
 
                 $this->write($destinationFile, $content);
 

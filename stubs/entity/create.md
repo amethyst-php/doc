@@ -46,7 +46,7 @@ try {
 }
 ```
 
-### Links
+## Other resources
 * [Attributes](attributes.md)
 * [Errors](errors.md)
 * [Handle the result](result.md)
