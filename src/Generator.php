@@ -23,6 +23,7 @@ class Generator
     {
         $composerReader = new ConfigurationReader();
         $composer = $composerReader->read(getcwd().'/composer.json');
+        $this->composer = $composer;
 
         $packageName = isset($composer->extra()->amethyst) ? $composer->extra()->amethyst->package : null;
 

@@ -1,5 +1,5 @@
 
-# {{ composer.extra()|json_encode }}
+# {{ composer.extra().amethyst.package }}
 
 This package is part of an ecosystem called [Amethyst](https://github.com/railken/amethyst)
 
