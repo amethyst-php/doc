@@ -193,6 +193,10 @@ class Generator
     public function publishable(string $source, string $destination)
     {
         $docs = [];
+        $composerReader = new ConfigurationReader();
+        $composer = $composerReader->read(getcwd().'/composer.json');
+        $name = explode("/", $composer->name())[1];
+
 
         foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source)) as $filename) {
             if (is_file($filename)) {
@@ -206,6 +210,7 @@ class Generator
 
 
                 $content = $this->parseContent(file_get_contents(__DIR__.'/../stubs/publishable-page/index.html'), [
+                    'name' => $name,
                     'content' => $content,
                     'data' => $this->data,
                 ]);
@@ -214,9 +219,6 @@ class Generator
 
             }
         }
-
-        $composerReader = new ConfigurationReader();
-        $composer = $composerReader->read(getcwd().'/composer.json');
 
         $this->generateFiles(__DIR__.'/../stubs/publishable', $destination, array_merge([
             'docs'     => $docs,
