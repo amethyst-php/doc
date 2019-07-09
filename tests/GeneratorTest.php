@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Documentation\Tests;
+namespace Amethyst\Documentation\Tests;
 
 class GeneratorTest extends BaseTest
 {

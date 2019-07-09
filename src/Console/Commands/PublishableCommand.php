@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Documentation\Console\Commands;
+namespace Amethyst\Documentation\Console\Commands;
 
 use Illuminate\Console\Command;
 

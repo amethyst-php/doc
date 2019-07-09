@@ -1,6 +1,6 @@
 <?php
 
-namespace Railken\Amethyst\Documentation;
+namespace Amethyst\Documentation;
 
 use Eloquent\Composer\Configuration\ConfigurationReader;
 use Illuminate\Support\Arr;

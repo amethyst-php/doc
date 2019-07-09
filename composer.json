@@ -1,5 +1,5 @@
 {
-    "name": "railken/doc-amethyst",
+    "name": "amethyst/doc",
     "keywords": ["laravel", "amethyst", "amethyst-documentation-generator", "documentation-generator", "documentation", "doc", "generator"],
     "license": "MIT",
     "require": {
@@ -13,22 +13,22 @@
     "require-dev": {
         "phpunit/phpunit": "~7.1",
         "orchestra/testbench": "3.6.*",
-        "railken/amethyst-foo": "0.1.*"
+        "amethyst/foo": "0.1.*"
     },
     "autoload": {
         "psr-4" : {
-            "Railken\\Amethyst\\Documentation\\" : "src/"
+            "Amethyst\\Documentation\\" : "src/"
         }
     },
     "autoload-dev": {
         "psr-4": { 
-            "Railken\\Amethyst\\Documentation\\Tests\\": "tests/"
+            "Amethyst\\Documentation\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Railken\\Amethyst\\Documentation\\GeneratorServiceProvider"
+                "Amethyst\\Documentation\\GeneratorServiceProvider"
             ]
         }
     }

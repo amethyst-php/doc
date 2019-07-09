@@ -1,10 +1,10 @@
 <?php
 
-namespace Railken\Amethyst\Documentation;
+namespace Amethyst\Documentation;
 
 use Illuminate\Support\ServiceProvider;
-use Railken\Amethyst\Documentation\Console\Commands\GenerateCommand;
-use Railken\Amethyst\Documentation\Console\Commands\PublishableCommand;
+use Amethyst\Documentation\Console\Commands\GenerateCommand;
+use Amethyst\Documentation\Console\Commands\PublishableCommand;
 
 class GeneratorServiceProvider extends ServiceProvider
 {
@@ -23,6 +23,6 @@ class GeneratorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(\Railken\Lem\Providers\ManagerServiceProvider::class);
-        $this->app->register(\Railken\Amethyst\Providers\ApiServiceProvider::class);
+        $this->app->register(\Amethyst\Providers\ApiServiceProvider::class);
     }
 }
